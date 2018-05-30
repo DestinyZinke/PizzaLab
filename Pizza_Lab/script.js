@@ -15,6 +15,7 @@ function createHTML(){
     var css = "<link rel=stylesheet href=style.css>";
     document.head.innerHTML += reset + css;
     navBar();
+    createSpecialDealBox();
    // createPizzas();
 }
 
@@ -137,7 +138,14 @@ function currentPizza(){
 
 function loadRecipt(evt){
     window.location = "order.html";
+}
 
+function createSpecialDealBox(){
+    var specDeal = document.createElement('DIV');
+    specDeal.innerHTML = "<div><h1>SPECIAL DEAL</h1></div>";
+    document.body.appendChild(specDeal);
+    specDeal.setAttribute('id', 'specialDeal');
+    specDeal.setAttribute('display', 'none');
 }
 
 function createToppingContainer(){
@@ -192,6 +200,10 @@ function createButtonContainer(){
     }
 
     document.getElementById('totalPrice').innerHTML = "&#36;" + pizza.price + ".00";
+
+    if(count>=5){
+        document.getElementById('specialDeal').setAttribute('display', 'block');
+    }
   }
 
 createHTML();
