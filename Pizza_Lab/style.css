@@ -1,0 +1,108 @@
+#pizzaList{
+    margin-top: 75px;   
+}
+
+#small_pizza{  
+    margin-top: 15px;
+    margin-left: 85px;
+}
+
+#medium_pizza{
+    margin-left: -65px;
+    margin-bottom: 40px;
+}
+
+#large_pizza{
+    margin-left: -15px;
+    margin-bottom: 94px;
+}
+nav{
+    background-color: #ff3039;
+    overflow: hidden;
+    position: fixed;
+    height: 50px;
+    width: 100%;
+}
+
+#navlist{
+    text-decoration: none;
+}
+
+
+.navItem{
+    font-size: 20px;
+    margin-top: 25px;
+    margin-left: 25px;
+    margin-right: 15px;
+    padding-right: 20px;
+    color: #fff;
+    float: left;
+    text-decoration: none;
+}
+
+a{
+    text-decoration: none;
+    color: #fff;
+}
+
+a:hover{
+    background-color: #fff;
+    color: #ff3039;
+}
+
+#navCompany{
+    margin-top: 10px;
+    margin-right: 700px;
+    font-size: 25px;
+}
+
+#extra_large_pizza{
+    margin-left: -50px;
+    margin-bottom: 150px;
+}
+
+.btn {
+    border: 2px solid #000;
+    width: 150px;
+    height: 150px;
+    margin: 10px;
+    text-align: center;
+    line-height: 150px;
+    cursor: pointer;
+    user-select: none;
+    float: left;
+  }
+  .btn:hover {
+    background: #aff
+  }
+  
+  #container{
+    max-width: 775px;
+    position: relative;
+    top: 125px;
+  }
+
+  #current_pizza{
+      position: relative;
+      top: 100px;
+      margin-left: 175px;
+  }
+
+  #topping_list{
+      margin-left: 950px;
+      text-align: center;
+      margin-top: 50px;
+      border: 1px solid #000;
+      width: 150px;
+      height: 200px;
+      overflow: auto;
+      display: block;
+  }
+  #toppings{
+      margin-top: 15px;
+  }
+
+  #proceed-btn{
+      margin-left:990px;
+      margin-top: 25px;
+  }
