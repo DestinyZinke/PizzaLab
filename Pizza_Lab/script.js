@@ -1,4 +1,4 @@
-var buttonNames = ['Pepperoni', 'Bacon', 'Grilled Chicken', 'Olives', 'Pineapple', 'Canadian Bacon', 'Italian Sausage', 'Banana Peppers', 'Onions', 'Mushrooms'];
+var buttonNames = ['Pepperoni', 'Bacon', 'Grilled Chicken', 'Olives', 'Pineapple', 'Canadian Bacon', 'Anchovies', 'Peppers', 'Onions', 'Extra Cheese'];
 var buttons = [];
 var tPrice = 0;
 var count = 0;
@@ -17,7 +17,6 @@ function createHTML(){
     var css = "<link rel=stylesheet href=style.css>";
     document.head.innerHTML += reset + css;
     navBar();
-    createSpecialDealBox();
    // createPizzas();
 }
 
@@ -154,6 +153,7 @@ function currentPizza(){
 
     createToppingContainer();
     createButtonContainer();
+    createSizeContainer();
 
     var proceed = document.createElement('BUTTON');
     proceed.innerHTML = "Proceed";
@@ -163,7 +163,6 @@ function currentPizza(){
     
 }
 
-<<<<<<< HEAD
 function createReciept(){
     var reciept = document.createElement('DIV');
     reciept.innerHTML = "<div class='recieptList'><span class=close>X</span><p id=PizzaOrder>Thanks for your Order! <br></p></div>"
@@ -187,18 +186,6 @@ function displayReciept(){
     reciept.style.display = 'none';
     window.location = "index.html";
 }
-=======
-function loadRecipt(evt){
-    window.location = "order.html";
-}
-
-function createSpecialDealBox(){
-    var specDeal = document.createElement('DIV');
-    specDeal.innerHTML = "<div><h1>SPECIAL DEAL</h1></div>";
-    document.body.appendChild(specDeal);
-    specDeal.setAttribute('id', 'specialDeal');
-    specDeal.setAttribute('display', 'none');
->>>>>>> master
 }
 
 
@@ -263,16 +250,21 @@ function createButtonContainer(){
         pizza.price=0;
     }else if(count==5){
         pizza.price=3;
+        displayDeal();
     }else{
         pizza.price +=1;
     }
 
     document.getElementById('totalPrice').innerHTML = "&#36;" + pizza.price + ".00";
-
-    if(count>=5){
-        document.getElementById('specialDeal').setAttribute('display', 'block');
-    }
   }
+
+  function displayDeal(){
+    var deal = document.createElement('DIV');
+    deal.innerHTML = "<p>Special</p><br><p>5 toppings only 3 dollars</p>"
+    document.body.appendChild(deal);
+    document.setAttribute('id', 'deal')
+  deal.style.display = "block";
+}   
 
 createHTML();
 
