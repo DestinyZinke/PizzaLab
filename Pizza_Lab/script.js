@@ -1,4 +1,4 @@
-var buttonNames = ['Pepperoni', 'Bacon', 'Grilled Chicken', 'Olives', 'Pineapple', 'Canadian Bacon', 'Anchovies', 'Peppers', 'Onions', 'Extra Cheese'];
+var buttonNames = ['Pepperoni', 'Bacon', 'Grilled Chicken', 'Olives', 'Pineapple', 'Canadian Bacon', 'Italian Sausage', 'Banana Peppers', 'Onions', 'Mushrooms'];
 var buttons = [];
 var tPrice = 0;
 var count = 0;
@@ -17,6 +17,7 @@ function createHTML(){
     var css = "<link rel=stylesheet href=style.css>";
     document.head.innerHTML += reset + css;
     navBar();
+    createSpecialDealBox();
    // createPizzas();
 }
 
@@ -162,6 +163,7 @@ function currentPizza(){
     
 }
 
+<<<<<<< HEAD
 function createReciept(){
     var reciept = document.createElement('DIV');
     reciept.innerHTML = "<div class='recieptList'><span class=close>X</span><p id=PizzaOrder>Thanks for your Order! <br></p></div>"
@@ -185,6 +187,18 @@ function displayReciept(){
     reciept.style.display = 'none';
     window.location = "index.html";
 }
+=======
+function loadRecipt(evt){
+    window.location = "order.html";
+}
+
+function createSpecialDealBox(){
+    var specDeal = document.createElement('DIV');
+    specDeal.innerHTML = "<div><h1>SPECIAL DEAL</h1></div>";
+    document.body.appendChild(specDeal);
+    specDeal.setAttribute('id', 'specialDeal');
+    specDeal.setAttribute('display', 'none');
+>>>>>>> master
 }
 
 
@@ -254,6 +268,10 @@ function createButtonContainer(){
     }
 
     document.getElementById('totalPrice').innerHTML = "&#36;" + pizza.price + ".00";
+
+    if(count>=5){
+        document.getElementById('specialDeal').setAttribute('display', 'block');
+    }
   }
 
 createHTML();
