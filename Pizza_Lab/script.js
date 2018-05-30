@@ -1,4 +1,4 @@
-var buttonNames = ['Pepperoni', 'Bacon', 'Grilled Chicken', 'Olives', 'Pineapple', 'Canadian Bacon', 'Anchovies', 'Peppers', 'Onions', 'Extra Cheese'];
+var buttonNames = ['Pepperoni', 'Bacon', 'Grilled Chicken', 'Olives', 'Pineapple', 'Canadian Bacon', 'Italian Sausage', 'Banana Peppers', 'Onions', 'Mushrooms'];
 var buttons = [];
 var tPrice = 0;
 var count = 0;
