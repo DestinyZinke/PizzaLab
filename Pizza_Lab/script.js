@@ -71,26 +71,6 @@ function createPizzas(){
     createExtraLargePizza();
 }
 
-function createPizzaSizes(){
-    var small_choice = document.createElement("DIV");
-        small_choice.innerHTML = "Small Pizza";
-        document.body.appendChild('small');
-}
-
-function createSmallPizza(){
-    var spCanvas = document.getElementById('small_pizza');
-    var spCtx = spCanvas.getContext("2d");
-    
-    spCanvas.width = 250;
-    spCanvas.height = 300;
-    spCtx.beginPath();
-    spCtx.arc(100, 75, 50,0, 2*Math.PI);
-    spCtx.fillStyle = '#D4BB75';
-    spCtx.fill();
-    document.body.appendChild(spCanvas);
-
-    
-}
 
 function createMedPizza(){
     var mpCanvas = document.getElementById('medium_pizza');
@@ -105,51 +85,14 @@ function createMedPizza(){
     document.body.appendChild(mpCanvas);
 }
 
-function createLargePizza(){
-    var lpCanvas = document.getElementById('large_pizza');
-    var lpCtx = lpCanvas.getContext("2d");
-    
-    lpCanvas.width = 350;
-    lpCanvas.height = 300;
-    lpCtx.beginPath();
-    lpCtx.arc(150, 125, 100,0, 2*Math.PI);
-    lpCtx.fillStyle = '#D4BB75';
-    lpCtx.fill();
-    document.body.appendChild(lpCanvas);
-}
-
-function createExtraLargePizza(){
-    var elpCanvas = document.getElementById('extra_large_pizza');
-    var elpCtx = elpCanvas.getContext("2d");
-    
-    elpCanvas.width = 350;
-    elpCanvas.height = 300;
-    elpCtx.beginPath();
-    elpCtx.arc(175, 150, 125,0, 2*Math.PI);
-    elpCtx.fillStyle = '#D4BB75';
-    elpCtx.fill();
-    document.body.appendChild(elpCanvas);
-}
-
 function currentPizza(){
     var pizza = document.createElement("DIV");
-    pizza.innerHTML = "<canvas id=current_pizza><button></button></canvas>"
+    pizza.innerHTML += "<img class=current_pizza_toppings src=Images/BasePizzaCrust.png />"
     pizza.width = 1000;
     pizza.height = 1000;
     
     document.body.appendChild(pizza);
     pizza.setAttribute("id", "currentPizza")   
-
-    var canvas = document.getElementById('current_pizza');
-    var ctx = canvas.getContext("2d");
-    
-    canvas.width = 250;
-    canvas.height = 300;
-    ctx.beginPath();
-    ctx.arc(150, 125, 100,0, 2*Math.PI);
-    ctx.fillStyle = '#D4BB75';
-    ctx.fill();
-    document.body.appendChild(canvas);
 
     createToppingContainer();
     createButtonContainer();
@@ -163,6 +106,9 @@ function currentPizza(){
     
 }
 
+function createSizeContainer(){
+    var sizes = document.createElement('BUTTON');
+}
 function createReciept(){
     var reciept = document.createElement('DIV');
     reciept.innerHTML = "<div class='recieptList'><span class=close>X</span><p id=PizzaOrder>Thanks for your Order! <br></p></div>"
@@ -239,9 +185,8 @@ function createButtonContainer(){
     console.log(temp);
     document.getElementById('toppings').innerHTML += temp + "<br><br>";
     pizza.toppings.push(temp);
-    console.log(document.getElementById('topping_list').innerHTML);
+    document.getElementById('currentPizza').innerHTML += "<img class=current_pizza_toppings src= Images/" + evt.target.innerText +"Full.png />";
     checkPrice();
-    console.log(pizza.price);
   }
 
   function checkPrice(){

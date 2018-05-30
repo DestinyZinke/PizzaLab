@@ -81,11 +81,19 @@ a:hover{
     /* top: 125px; */
   }
 
-  #current_pizza{
+  .current_pizza_toppings{
       margin-top: 50px;
       /* position: relative; */
       /* top: 100px; */
       margin-left: 875px;
+      width: 150px;
+      height: 150px;
+  }
+
+  img{
+    top:0;
+    left: 0;
+    position: absolute; 
   }
 
   #topping_list{
