@@ -2,11 +2,13 @@ var buttonNames = ['Pepperoni', 'Bacon', 'Grilled Chicken', 'Olives', 'Pineapple
 var buttons = [];
 var tPrice = 0;
 var count = 0;
+var span;
 var pizza={
     toppings : [],
     size : "Default",
     price: 0
 }
+
 
 
 
@@ -19,6 +21,7 @@ function createHTML(){
    // createPizzas();
 }
 
+
 function navBar(){
     var nav = document.createElement("NAV");
     nav.setAttribute("id","navBar"); 
@@ -27,7 +30,31 @@ function navBar(){
     document.body.appendChild(nav);
 }
 
+function loadDefault(){
+    var default_1 =  "<div class=default_pizza>Cheese<div class=default_price>Large &#45;10&#46;99</div><button>Add</button></div>";
+    var default_2 =  "<div class=default_pizza>Pepperoni<div class=default_price>Large &#45;10&#46;99</div><button>Add</button></div>";
+    var default_3 =  "<div class=default_pizza>Hawiian<div class=default_price>Large &#45;10&#46;99</div><button>Add</button></div>";
+    var default_4 =  "<div class=default_pizza>Meat Lovers<div class=default_price>Large &#45;10&#46;99</div><button>Add</button></div>";
+    var default_5 =  "<div class=default_pizza>Vegetarian<div class=default_price>Large &#45;10&#46;99</div><button>Add</button></div>";
+    
+    var defaults = document.createElement('DIV');
+    defaults.innerHTML = default_1 + default_2 + default_3 + default_4 + default_5;
+    defaults.setAttribute('id', 'defaults');
+    
+    document.body.appendChild(defaults);
 
+    var customBtn = document.createElement('BUTTON');
+    customBtn.innerHTML = "Create Your Own";
+
+    document.body.appendChild(customBtn);
+
+    customBtn.setAttribute('id','customBtn');
+    customBtn.addEventListener('click',customRedirect);
+}
+
+function customRedirect(){
+    window.location = 'custom.html';
+}
 function createPizzas(){
     var pizza = document.createElement("DIV");
     pizza.innerHTML = "<canvas id=small_pizza></canvas><canvas id=medium_pizza></canvas><canvas id=large_pizza></canvas>" +
@@ -132,10 +159,35 @@ function currentPizza(){
     proceed.innerHTML = "Proceed";
     document.body.appendChild(proceed);
     proceed.setAttribute('id', 'proceed-btn')
-    proceed.addEventListener('click', loadRecipt);
+    proceed.addEventListener('click', createReciept);
     
 }
 
+<<<<<<< HEAD
+function createReciept(){
+    var reciept = document.createElement('DIV');
+    reciept.innerHTML = "<div class='recieptList'><span class=close>X</span><p id=PizzaOrder>Thanks for your Order! <br></p></div>"
+    reciept.setAttribute("id","reciept");
+    reciept.setAttribute("class","reciept");
+    document.body.appendChild(reciept);
+    displayReciept();
+}
+
+function displayReciept(){
+    var reciept = document.getElementById('reciept');
+    //document.getElementById.innerHTML += pizza.size;
+    //document.getElementById.innerHTML +=<br>;
+    document.getElementById('PizzaOrder').innerHTML += pizza.price;  
+    
+    pizza.toppings.forEach(addTopping);
+    reciept.style.display = "block";
+    console.log("Hits")
+    span = document.getElementsByClassName("close")[0]; 
+    span.onclick = function(){
+    reciept.style.display = 'none';
+    window.location = "index.html";
+}
+=======
 function loadRecipt(evt){
     window.location = "order.html";
 }
@@ -146,7 +198,22 @@ function createSpecialDealBox(){
     document.body.appendChild(specDeal);
     specDeal.setAttribute('id', 'specialDeal');
     specDeal.setAttribute('display', 'none');
+>>>>>>> master
 }
+
+
+
+function addTopping(item,index,arr){
+    document.getElementById("PizzaOrder").innerHTML += pizza.toppings[index];
+    console.log(pizza.price + "dollars");
+    reciept.style.display = "block";
+}
+
+function redirectHome(){
+    reciept.style.display = "none";
+    window.location = 'index.html';
+}
+
 
 function createToppingContainer(){
     var tText = document.createElement('DIV');
@@ -160,8 +227,9 @@ function createToppingContainer(){
 }
 
 function createButtonContainer(){
-    var container = document.getElementById('container');
-    var buttons = document.createElement('DIV'); 
+    var container = document.createElement("DIV");
+    container.setAttribute('id', 'container');
+    document.body.appendChild(container);
     buttonNames.forEach(buildButton);
   }
 
