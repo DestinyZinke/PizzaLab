@@ -68,7 +68,7 @@ a:hover{
     margin-left: 15px;
     margin-bottom: 15px;
     text-align: center;
-    line-height: 150px;
+    line-height: 15px;
     cursor: pointer;
     user-select: none;
     float: left;
@@ -76,28 +76,55 @@ a:hover{
   
   #container{
     max-width: 775px;
-    margin-top: -350px;
+    margin-top: -300px;
     /* position: relative; */
     /* top: 125px; */
   }
 
-  .current_pizza_toppings{
+  .top_pizza_toppings{
       margin-top: 50px;
       /* position: relative; */
       /* top: 100px; */
       margin-left: 875px;
-      width: 150px;
-      height: 150px;
+      width: 200px;
+      height: 200px;
+      position: absolute;
   }
 
-  img{
-    top:0;
-    left: 0;
-    position: absolute; 
-  }
+  .current_pizza_toppings{
+    margin-top: 50px;
+    /* position: relative; */
+    /* top: 100px; */
+    margin-left: 875px;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+}
+
+  .left_pizza_toppings{
+    margin-top: 50px;
+    /* position: relative; */
+    /* top: 100px; */
+    margin-left: 875px;
+    width: 125px;
+    height: 200px;
+    position: absolute;
+}
+
+.right_pizza_toppings{
+    margin-top: 50px;
+    /* position: relative; */
+    /* top: 100px; */
+    margin-left: 935px;
+    width: 125px;
+    height: 200px;
+    position: absolute;
+}
+
 
   #topping_list{
-      margin-left: 950px;
+      margin-top: 200px;
+      margin-left: 900px;
       text-align: center;
       border: 1px solid #000;
       width: 150px;
@@ -176,4 +203,9 @@ a:hover{
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.side_buttons{
+    width: 25px;
+    height: 25px;
 }

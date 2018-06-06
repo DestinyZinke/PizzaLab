@@ -1,4 +1,4 @@
-var buttonNames = ['Pepperoni', 'Bacon', 'Grilled Chicken', 'Olives', 'Pineapple', 'Canadian Bacon', 'Anchovies', 'Peppers', 'Onions', 'Extra Cheese'];
+var buttonNames = ['Pepperoni', 'Bacon', 'Chicken', 'Olives', 'Pineapple', 'Ham', 'Mushrooms', 'Peppers', 'Onions', 'Sausage'];
 var buttons = [];
 var tPrice = 0;
 var count = 0;
@@ -8,8 +8,9 @@ var pizza={
     size : "Default",
     price: 0
 }
+var side;
 
-
+"<div>"+name+'<button 1 id="'+name+'Full"/><button 2 id="'+name+'left"/>'
 
 
 function createHTML(){
@@ -168,25 +169,80 @@ function createButtonContainer(){
 
 
   
-  function buildButton(item, index, arr){
-
-    
+  function buildButton(item, index, arr){    
     console.log("button " + item + " at index " + index + ' created.');
     buttons[index] = document.createElement('div');
     buttons[index].textContent = item;
+    buttons[index].style.color = "#fff";
+    buttons[index].style.backgroundColor = "#000";
+    buttons[index].innerHTML += "<img class=side_buttons src=Images/Full.png onclick='full(\""+item+"\")'><img class=side_buttons src=Images/Left.png onclick='left(\""+item+"\")''><img class=side_buttons src=Images/Right.png onclick='right(\""+item+"\")'>";
     buttons[index].setAttribute('class', 'btn');
     container.appendChild(buttons[index]);
-    buttons[index].addEventListener('click', btnClicked);
+//    buttons[index].addEventListener('click', btnClicked);
   }
   
-  function btnClicked(evt) {
-    console.log(evt.target.innerText + " clicked");
-    var temp = evt.target.innerText;
-    console.log(temp);
-    document.getElementById('toppings').innerHTML += temp + "<br><br>";
-    pizza.toppings.push(temp);
-    document.getElementById('currentPizza').innerHTML += "<img class=current_pizza_toppings src= Images/" + evt.target.innerText +"Full.png />";
+  function full(e){
+      console.log(side);
+      var tempTopping = e;
+      side = e + "Full.png";
+      var currentClass = "current_pizza_toppings";
+      if(document.getElementById(side) != undefined){
+          removeTopping(side);
+      }else if(document.getElementById(side) == undefined){
+        var t1 = e +"Left.png";
+        var t2 = e+"Right.png";
+        checkallToppings(t1, t2);
+        addTopping(side, tempTopping, currentClass);
+      }
+  }
+
+  function left(e){
+    var tempTopping = e;
+    side = e+"Left.png" 
+    var currentClass = "left_pizza_toppings";
+    if(document.getElementById(side) != undefined){
+        removeTopping(side);
+    }else if(document.getElementById(side) == undefined){
+        var t1 = e +"Full.png";
+        var t2 = e+"Right.png";
+        checkallToppings(t1, t2);
+      addTopping(side, tempTopping, currentClass);
+    }
+  }
+
+  function right(e){
+    var tempTopping = e;
+      side = e+"Right.png";
+      var currentClass = "right_pizza_toppings";
+    if(document.getElementById(side) != undefined){
+        removeTopping(side);
+    }else if(document.getElementById(side) == undefined){
+        var t1 = e +"Full.png";
+        var t2 = e+"Left.png";
+        checkallToppings(t1, t2);
+        addTopping(side, tempTopping, currentClass);
+    }
+  }
+
+
+  function addTopping(e, thisTopping, currentClass) {
+    document.getElementById('toppings').innerHTML += thisTopping + "<br><br>";
+    pizza.toppings.push(thisTopping);
+    document.getElementById('currentPizza').innerHTML += "<img id=" + e + " class=" + currentClass + " src= Images/"+ e+ " />";
     checkPrice();
+  }
+
+  function checkallToppings(t1, t2){
+    if(document.getElementById(t1) != undefined){
+        removeTopping(t1);
+    }
+    if(document.getElementById(t2) != undefined){
+        removeTopping(t2);
+    }
+  }
+  function removeTopping(e){
+    var elem = document.getElementById(e);
+    elem.remove();
   }
 
   function checkPrice(){
