@@ -170,28 +170,27 @@ function createButtonContainer(){
 
   
   function buildButton(item, index, arr){    
-    console.log("button " + item + " at index " + index + ' created.');
     buttons[index] = document.createElement('div');
     buttons[index].textContent = item;
     buttons[index].style.color = "#fff";
-    buttons[index].style.backgroundColor = "#000";
-    buttons[index].innerHTML += "<img class=side_buttons src=Images/Full.png onclick='full(\""+item+"\")'><img class=side_buttons src=Images/Left.png onclick='left(\""+item+"\")''><img class=side_buttons src=Images/Right.png onclick='right(\""+item+"\")'>";
+    buttons[index].style.backgroundColor = "#ff3039";
+    buttons[index].innerHTML += "<br><br><img class=side_buttons src=Images/Full.png onclick='full(\""+item+"\")'><img class=side_buttons src=Images/Left.png onclick='left(\""+item+"\")''><img class=side_buttons src=Images/Right.png onclick='right(\""+item+"\")'>";
     buttons[index].setAttribute('class', 'btn');
     container.appendChild(buttons[index]);
 //    buttons[index].addEventListener('click', btnClicked);
   }
   
   function full(e){
-      console.log(side);
       var tempTopping = e;
       side = e + "Full.png";
       var currentClass = "current_pizza_toppings";
       if(document.getElementById(side) != undefined){
           removeTopping(side);
+          removeToppingElem(e);
       }else if(document.getElementById(side) == undefined){
         var t1 = e +"Left.png";
         var t2 = e+"Right.png";
-        checkallToppings(t1, t2);
+        checkallToppings(t1, t2, e);
         addTopping(side, tempTopping, currentClass);
       }
   }
@@ -202,11 +201,12 @@ function createButtonContainer(){
     var currentClass = "left_pizza_toppings";
     if(document.getElementById(side) != undefined){
         removeTopping(side);
+        removeToppingElem(e);
     }else if(document.getElementById(side) == undefined){
         var t1 = e +"Full.png";
         var t2 = e+"Right.png";
-        checkallToppings(t1, t2);
-      addTopping(side, tempTopping, currentClass);
+        checkallToppings(t1, t2, e);
+         addTopping(side, tempTopping, currentClass);
     }
   }
 
@@ -216,10 +216,11 @@ function createButtonContainer(){
       var currentClass = "right_pizza_toppings";
     if(document.getElementById(side) != undefined){
         removeTopping(side);
+        removeToppingElem(e);
     }else if(document.getElementById(side) == undefined){
         var t1 = e +"Full.png";
         var t2 = e+"Left.png";
-        checkallToppings(t1, t2);
+        checkallToppings(t1, t2, e);
         addTopping(side, tempTopping, currentClass);
     }
   }
@@ -229,15 +230,19 @@ function createButtonContainer(){
     document.getElementById('toppings').innerHTML += thisTopping + "<br><br>";
     pizza.toppings.push(thisTopping);
     document.getElementById('currentPizza').innerHTML += "<img id=" + e + " class=" + currentClass + " src= Images/"+ e+ " />";
+    count +=1;
+    pizza.price +=1;
     checkPrice();
   }
 
-  function checkallToppings(t1, t2){
+  function checkallToppings(t1, t2, e){
     if(document.getElementById(t1) != undefined){
         removeTopping(t1);
+        removeToppingElem(e);
     }
     if(document.getElementById(t2) != undefined){
         removeTopping(t2);
+        removeToppingElem(e);
     }
   }
   function removeTopping(e){
@@ -245,25 +250,43 @@ function createButtonContainer(){
     elem.remove();
   }
 
+  function removeToppingElem(e){
+    document.getElementById('toppings').innerHTML = "";
+    var index = pizza.toppings.indexOf(e);
+    if(index != -1) {
+        pizza.toppings.splice(index, 1);
+    }
+
+    for(var i = 0; i < pizza.toppings.length; i++){
+       document.getElementById("toppings").innerHTML += pizza.toppings[i] + "<br><br>";
+    }
+
+    pizza.price -=1;
+    count -=1;
+
+    console.log("count: " + count);
+    checkPrice();
+    document.getElementById('totalPrice').innerHTML = "&#36;" + pizza.price + ".00";
+    
+     
+}
   function checkPrice(){
-    count +=1;
     if(count==1){
         pizza.price=0;
-    }else if(count==5){
+    }else if(count==5 || count == 4){
         pizza.price=3;
-        displayDeal();
-    }else{
-        pizza.price +=1;
+       // displayDeal();
     }
 
     document.getElementById('totalPrice').innerHTML = "&#36;" + pizza.price + ".00";
+    console.log("count:" + count)
   }
 
   function displayDeal(){
     var deal = document.createElement('DIV');
     deal.innerHTML = "<p>Special</p><br><p>5 toppings only 3 dollars</p>"
     document.body.appendChild(deal);
-    document.setAttribute('id', 'deal')
+   // document.setAttribute('id', 'deal')
   deal.style.display = "block";
 }   
 
