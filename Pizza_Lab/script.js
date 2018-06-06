@@ -5,10 +5,9 @@ var count = 0;
 var span;
 var pizza={
     toppings : [],
-    size : "Default",
+    size : "Small",
     price: 0
 }
-var side;
 
 "<div>"+name+'<button 1 id="'+name+'Full"/><button 2 id="'+name+'left"/>'
 
@@ -30,12 +29,26 @@ function navBar(){
     document.body.appendChild(nav);
 }
 
+function fillHome(){
+    var homeDiv = document.createElement('DIV');
+    homeDiv.innerHTML = "<h1><strong>Create Your Pizza</strong></h1><br><br><div id='intro'><p>Welcome to Pizza Now! The fastest pizza delivery company ever!</p><br><p>Click Order to start your experience!</p></div>"
+    homeDiv.setAttribute('id', 'homeDiv');
+    
+    document.body.appendChild(homeDiv);
+}
+
+function contactFill(){
+    var homeDiv = document.createElement('DIV');
+    homeDiv.innerHTML = "<h1><strong>Contact Us</strong></h1><br><br><div id='intro'><p>Call 888-259-1529</p><br><p>Or Email us at PizzaNow@thisEmail.com</p></div>"
+    homeDiv.setAttribute('id', 'homeDiv');
+    document.body.appendChild(homeDiv);
+}
 function loadDefault(){
-    var default_1 =  "<div class=default_pizza>Cheese<div class=default_price>Large &#45;10&#46;99</div><button>Add</button></div>";
-    var default_2 =  "<div class=default_pizza>Pepperoni<div class=default_price>Large &#45;10&#46;99</div><button>Add</button></div>";
-    var default_3 =  "<div class=default_pizza>Hawiian<div class=default_price>Large &#45;10&#46;99</div><button>Add</button></div>";
-    var default_4 =  "<div class=default_pizza>Meat Lovers<div class=default_price>Large &#45;10&#46;99</div><button>Add</button></div>";
-    var default_5 =  "<div class=default_pizza>Vegetarian<div class=default_price>Large &#45;10&#46;99</div><button>Add</button></div>";
+    var default_1 =  "<div class=default_pizza>Cheese<div class=default_price>Large &#45;10&#46;99</div><button onclick=defaultAddAll('Default_1')>Add</button></div>";
+    var default_2 =  "<div class=default_pizza>Pepperoni<div class=default_price>Large &#45;10&#46;99</div><button onclick=defaultAddAll('Default_2')>Add</button></div>";
+    var default_3 =  "<div class=default_pizza>Hawiian<div class=default_price>Large &#45;10&#46;99</div><button onclick=defaultAddAll('Default_3')>Add</button></div>";
+    var default_4 =  "<div class=default_pizza>Meat Lovers<div class=default_price>Large &#45;10&#46;99</div><button onclick=defaultAddAll('Default_4')>Add</button></div>";
+    var default_5 =  "<div class=default_pizza>Vegetarian<div class=default_price>Large &#45;10&#46;99</div><button onclick=defaultAddAll('Default_5')>Add</button></div>";
     
     var defaults = document.createElement('DIV');
     defaults.innerHTML = default_1 + default_2 + default_3 + default_4 + default_5;
@@ -50,6 +63,36 @@ function loadDefault(){
 
     customBtn.setAttribute('id','customBtn');
     customBtn.addEventListener('click',customRedirect);
+}
+
+function defaultAddAll(e){
+if(e == "Default_1"){
+    pizza.price = 10.99;
+    pizza.toppings = ['Cheese Only'];
+    pizza.size = 'Large';
+}
+if(e == "Default_2"){
+    pizza.price = 10.99;
+    pizza.toppings = ['Pepperoni'];
+    pizza.size = 'Large';
+}
+if(e == "Default_3"){
+    pizza.price = 10.99;
+    pizza.toppings = ['Ham', 'Pineapple'];
+    pizza.size = 'Large';
+}
+if(e == "Default_4"){
+    pizza.price = 10.99;
+    pizza.toppings = ['Sausage', 'Bacon', 'Chicken'];
+    pizza.size = 'Large';
+}
+if(e == "Default_5"){
+    pizza.price = 10.99;
+    pizza.toppings = ['Olives', 'Mushrooms', 'Onions', 'Peppers'];
+    pizza.size = 'Large';
+}
+
+createReciept();
 }
 
 function customRedirect(){
@@ -102,32 +145,48 @@ function currentPizza(){
     var proceed = document.createElement('BUTTON');
     proceed.innerHTML = "Proceed";
     document.body.appendChild(proceed);
-    proceed.setAttribute('id', 'proceed-btn')
+    proceed.setAttribute('id', 'proceed-btn');  
     proceed.addEventListener('click', createReciept);
     
 }
 
 function createSizeContainer(){
-    var sizes = document.createElement('BUTTON');
+    var sizes = document.createElement('DIV');
+    sizes.innerHTML = "<select id=select><option value=Small>Small</option><option value=Medium>Medium</option><option value=Large>Large</option><option value=XL>Extra Large</option></select><button id='selectbtn' onclick=text()>Apply</button>"
+    document.body.appendChild(sizes);
+    sizes.setAttribute('class', 'select')
 }
 function createReciept(){
+    console.log("Help")
     var reciept = document.createElement('DIV');
     reciept.innerHTML = "<div class='recieptList'><span class=close>X</span><p id=PizzaOrder>Thanks for your Order! <br></p></div>"
     reciept.setAttribute("id","reciept");
     reciept.setAttribute("class","reciept");
     document.body.appendChild(reciept);
-    displayReciept();
+    displayReciept(reciept);
 }
 
 function displayReciept(){
+    console.log(pizza);
     var reciept = document.getElementById('reciept');
-    //document.getElementById.innerHTML += pizza.size;
-    //document.getElementById.innerHTML +=<br>;
-    document.getElementById('PizzaOrder').innerHTML += pizza.price;  
+    document.getElementById('PizzaOrder').innerHTML += '<br>';
+    document.getElementById('PizzaOrder').innerHTML += '<br>';    
+    document.getElementById('PizzaOrder').innerHTML += pizza.size;
+    document.getElementById('PizzaOrder').innerHTML += '<br>';
+    document.getElementById('PizzaOrder').innerHTML += '<br>';
     
-    pizza.toppings.forEach(addTopping);
+    document.getElementById('PizzaOrder').innerHTML += pizza.price;  
+    document.getElementById('PizzaOrder').innerHTML += '<br>';
+    document.getElementById('PizzaOrder').innerHTML += '<br>';
+    
+    
+    for(var i = 0; i < pizza.toppings.length; i++){
+    document.getElementById('PizzaOrder').innerHTML += pizza.toppings[i];
+    document.getElementById('PizzaOrder').innerHTML += '<br>';
+    }
+    
     reciept.style.display = "block";
-    console.log("Hits")
+    console.log("Hits");
     span = document.getElementsByClassName("close")[0]; 
     span.onclick = function(){
     reciept.style.display = 'none';
@@ -135,7 +194,10 @@ function displayReciept(){
 }
 }
 
-
+function text(elem){
+    pizza.size = document.getElementById('select').value;
+    console.log(pizza.size);
+}
 
 function addTopping(item,index,arr){
     document.getElementById("PizzaOrder").innerHTML += pizza.toppings[index];
@@ -175,12 +237,52 @@ function createButtonContainer(){
     buttons[index].style.color = "#fff";
     buttons[index].style.backgroundColor = "#ff3039";
     buttons[index].style.borderRadius =  '15px ';
-    buttons[index].innerHTML += "<br><br><img class=side_buttons src=Images/Full.png onclick='full(\""+item+"\")'><img class=side_buttons src=Images/Left.png onclick='left(\""+item+"\")''><img class=side_buttons src=Images/Right.png onclick='right(\""+item+"\")'>";
+    buttons[index].innerHTML += "<br><br><img class=side_buttons src=Images/Full.png onclick='full(\""+item+"\")'><img class=side_buttons src=Images/Left.png onclick='left(\""+item+"\")''><img class=side_buttons src=Images/Right.png onclick='right(\""+item+"\")'>" +
+    "<br><br><form><input type=radio name=double value=double onchange=doubleToppings(\""+item+"\")>Double</input><br><input type=radio value=none name=double onchange=removeDoubleToppings(\""+item+"\"); checked=checked>No Double</input></form>";
     buttons[index].setAttribute('class', 'btn');
     container.appendChild(buttons[index]);
 //    buttons[index].addEventListener('click', btnClicked);
   }
   
+  function doubleToppings(e){
+    count += 1;
+    pizza.price += 1;
+    checkPrice();
+    doubleToppingsElem(e)
+    }
+
+  function doubleToppingsElem(e){
+    console.log('hits')
+    document.getElementById('toppings').innerHTML = "";
+    var index = pizza.toppings.indexOf(e);
+    if(index != -1) {
+        pizza.toppings.splice(index, 1, e+"X2");
+    }
+
+    for(var i = 0; i < pizza.toppings.length; i++){
+       document.getElementById("toppings").innerHTML += pizza.toppings[i] + "<br><br>";
+    }
+  }
+
+  function removeDoubleToppings(e){
+    count-=1;
+    pizza.price -=1;
+    checkPrice();
+    removeDoubleToppingsElem(e);
+  }
+
+  function removeDoubleToppingsElem(e){
+    document.getElementById('toppings').innerHTML = "";
+    var index = pizza.toppings.indexOf(e +"X2");
+      console.log(index)
+    if(index != -1) {
+        pizza.toppings.splice(index, 1, e);
+    }
+
+    for(var i = 0; i < pizza.toppings.length; i++){
+       document.getElementById("toppings").innerHTML += pizza.toppings[i] + "<br><br>";
+    }
+  }
   function full(e){
       var tempTopping = e;
       side = e + "Full.png";
@@ -212,7 +314,6 @@ function createButtonContainer(){
   }
 
   function right(e){
-    var tempTopping = e;
       side = e+"Right.png";
       var currentClass = "right_pizza_toppings";
     if(document.getElementById(side) != undefined){
@@ -222,7 +323,7 @@ function createButtonContainer(){
         var t1 = e +"Full.png";
         var t2 = e+"Left.png";
         checkallToppings(t1, t2, e);
-        addTopping(side, tempTopping, currentClass);
+        addTopping(side, e, currentClass);
     }
   }
 
@@ -236,7 +337,7 @@ function createButtonContainer(){
     checkPrice();
   }
 
-  function checkallToppings(t1, t2, e){
+  function checkallToppings(t1, t2, e, d1, d2){
     if(document.getElementById(t1) != undefined){
         removeTopping(t1);
         removeToppingElem(e);
@@ -244,6 +345,7 @@ function createButtonContainer(){
     if(document.getElementById(t2) != undefined){
         removeTopping(t2);
         removeToppingElem(e);
+    
     }
   }
   function removeTopping(e){
@@ -276,7 +378,11 @@ function createButtonContainer(){
         pizza.price=0;
     }else if(count==5 || count == 4){
         pizza.price=3;
-       // displayDeal();
+        
+    }
+
+    if(count == 5){
+        displayDeal();
     }
 
     document.getElementById('totalPrice').innerHTML = "&#36;" + pizza.price + ".00";
@@ -284,11 +390,12 @@ function createButtonContainer(){
   }
 
   function displayDeal(){
+      console.log("Deal")
     var deal = document.createElement('DIV');
     deal.innerHTML = "<p>Special</p><br><p>5 toppings only 3 dollars</p>"
     document.body.appendChild(deal);
-   // document.setAttribute('id', 'deal')
-  deal.style.display = "block";
+    deal.setAttribute('id', 'deal')
+    deal.style.display = "block";
 }   
 
 createHTML();
