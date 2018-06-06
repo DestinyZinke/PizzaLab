@@ -174,6 +174,7 @@ function createButtonContainer(){
     buttons[index].textContent = item;
     buttons[index].style.color = "#fff";
     buttons[index].style.backgroundColor = "#ff3039";
+    buttons[index].style.borderRadius =  '15px ';
     buttons[index].innerHTML += "<br><br><img class=side_buttons src=Images/Full.png onclick='full(\""+item+"\")'><img class=side_buttons src=Images/Left.png onclick='left(\""+item+"\")''><img class=side_buttons src=Images/Right.png onclick='right(\""+item+"\")'>";
     buttons[index].setAttribute('class', 'btn');
     container.appendChild(buttons[index]);
@@ -183,7 +184,7 @@ function createButtonContainer(){
   function full(e){
       var tempTopping = e;
       side = e + "Full.png";
-      var currentClass = "current_pizza_toppings";
+      var currentClass = "top_pizza_toppings";
       if(document.getElementById(side) != undefined){
           removeTopping(side);
           removeToppingElem(e);
